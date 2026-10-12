@@ -210,18 +210,18 @@
   @media (max-width:900px){.side{grid-template-columns:1fr;gap:48px}.side .phone{margin:0 auto}}
 
   /* how a deal works */
-  .track{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:18px;counter-reset:step}
+  .track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:step}
   .step{position:relative;padding-top:56px}
   .step::before{counter-increment:step;content:counter(step);position:absolute;top:0;left:0;width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--ink);color:#fff;font:700 20px "Barlow Condensed",sans-serif;transform:skewX(var(--slant))}
-  .step h3{font-family:"Barlow",sans-serif;font-size:18px;line-height:1.25}
-  .step p{color:var(--slate);font-size:15px;margin-top:6px}
+  .step h3{font-family:"Barlow",sans-serif;font-size:22px;line-height:1.25}
+  .step p{color:var(--slate);font-size:16px;margin-top:6px}
   .progress{margin-top:56px;max-width:560px}
   .progress .bar{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
   .progress .bar i{height:10px;border-radius:6px;background:rgba(34,197,94,.25)}
   .progress .bar i.done{background:var(--field)}
   .progress .labels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px;font-size:14px;font-weight:600;color:var(--slate)}
   .progress p{font-size:15px;color:var(--slate);margin-top:12px}
-  @media (max-width:980px){.track{grid-template-columns:repeat(3,1fr);row-gap:40px}}
+  @media (max-width:980px){.track{grid-template-columns:repeat(2,1fr);row-gap:40px}}
   @media (max-width:560px){.track{grid-template-columns:1fr 1fr}}
 
   /* the money */
@@ -452,20 +452,13 @@
     <div class="wrap">
       <div class="head">
         <h2>How a deal works</h2>
-        <p class="lede">Every deal follows the same six steps, and both sides can see exactly where it stands.</p>
+        <p class="lede">Four steps from posting to payday.</p>
       </div>
       <div class="track">
-        <div class="step"><h3>Business posts a deal</h3><p>The pay, the deliverable, and the number of spots.</p></div>
-        <div class="step"><h3>Athletes apply</h3><p>Interested athletes apply from the Browse tab.</p></div>
-        <div class="step"><h3>Accept and fund</h3><p>The business accepts an athlete and the payment goes into escrow.</p></div>
-        <div class="step"><h3>Both sign</h3><p>An NIL contract is generated and signed in the app.</p></div>
-        <div class="step"><h3>The work gets done</h3><p>The athlete delivers and the business confirms it.</p></div>
-        <div class="step"><h3>Payment released</h3><p>Both mark it complete and the athlete gets paid.</p></div>
-      </div>
-      <div class="progress" role="img" aria-label="Deal progress example: signed and in progress complete, completed pending">
-        <div class="bar"><i class="done"></i><i class="done"></i><i></i></div>
-        <div class="labels"><span>Signed</span><span>In progress</span><span>Completed</span></div>
-        <p>The same progress bar sits on every deal in the app, so nobody has to ask where things stand.</p>
+        <div class="step"><h3>Post</h3><p>A business posts a paid deal.</p></div>
+        <div class="step"><h3>Apply</h3><p>Athletes apply in a tap.</p></div>
+        <div class="step"><h3>Sign &amp; fund</h3><p>Contract signed, payment held safely.</p></div>
+        <div class="step"><h3>Get paid</h3><p>Work done, athlete gets 100%.</p></div>
       </div>
     </div>
   </section>
