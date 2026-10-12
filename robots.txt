@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /payment-success.html
+Disallow: /payment-cancelled.html
+Disallow: /payout-complete.html
+Disallow: /payout-refresh.html
+
+Sitemap: https://sidelinenil.com/sitemap.xml
