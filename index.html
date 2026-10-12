@@ -248,11 +248,19 @@
   .closer .stripe{position:absolute;right:-80px;top:-40px;bottom:-40px;width:260px;background:var(--field);transform:skewX(var(--slant));opacity:.9}
   @media (max-width:760px){.closer .stripe{width:120px;right:-70px}}
 
-  footer{padding:36px 0 48px}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;color:var(--slate);font-size:14.5px}
-  footer nav{display:flex;gap:22px;flex-wrap:wrap}
-  footer a{text-decoration:none}
+  footer{padding:56px 0 36px;color:var(--slate);font-size:15px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+  .foot-brand .tag{margin-top:12px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;font-size:24px;color:var(--ink);line-height:1.1}
+  .foot-brand p{margin-top:8px;max-width:22em}
+  footer h4{font:700 13px "Barlow",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:12px}
+  footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+  footer a{color:var(--slate);text-decoration:none}
   footer a:hover{color:var(--ink)}
+  footer .brand{color:var(--ink)}
+  .social{display:inline-flex;align-items:center;gap:8px}
+  .social svg{flex:none}
+  .foot-base{margin-top:44px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:14px}
+  @media (max-width:760px){.foot-grid{grid-template-columns:1fr 1fr}.foot-brand{grid-column:1/-1}}
 
   /* one orchestrated entrance: bars sweep in, phone rises */
   @media (prefers-reduced-motion:no-preference){
@@ -518,12 +526,40 @@
 
 <footer>
   <div class="wrap">
-    <span>&copy; 2026 Sideline NIL LLC, State College, PA</span>
-    <nav aria-label="Footer">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
-      <a href="mailto:sidelinenil@gmail.com">Contact</a>
-    </nav>
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top" aria-label="Sideline home"><img src="assets/logo-mark.png" alt=""><span>SIDELINE</span></a>
+        <div class="tag">NIL deals, simplified.</div>
+        <p>Paid promo deals between student-athletes and local businesses, with escrow built in.</p>
+      </div>
+      <div>
+        <h4>Sideline</h4>
+        <ul>
+          <li><a href="#how">How it works</a></li>
+          <li><a href="#money">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#join">Get launch updates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <ul>
+          <li><a class="social" href="https://www.instagram.com/sideline.nil/" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@sideline.nil</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="mailto:sidelinenil@gmail.com">Contact us</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Sideline NIL LLC</span>
+      <span>Made in State College, PA</span>
+    </div>
   </div>
 </footer>
 
