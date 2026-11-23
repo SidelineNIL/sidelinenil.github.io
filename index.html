@@ -26,7 +26,7 @@
 <style>
   :root{
     --field:#22C55E;      /* brand green: fills, bars, buttons */
-    --turf:#15803D;       /* green for text on white (readable) */
+    --turf:#22C55E;       /* green for text on white (readable) */
     --ink:#111827;        /* brand dark text */
     --slate:#5B6472;      /* secondary text */
     --mist:#F2F7F3;       /* cool green-white section ground */
@@ -53,9 +53,10 @@
   .lede{color:var(--slate);font-size:19px;max-width:34em}
 
   /* ---------- header ---------- */
-  .top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
-  .top.scrolled{border-bottom-color:var(--line)}
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+  /* floating pill menu bar (11/23, idea from mezi.app) */
+  .top{position:sticky;top:12px;z-index:20;padding:0 12px;margin-top:12px}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:1100px;padding:0 10px 0 22px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);box-shadow:0 10px 30px -12px rgba(17,24,39,.28),0 0 0 1px rgba(17,24,39,.06)}
+  .top .btn-small{border-radius:999px}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
   .brand img{height:26px;width:auto}
   .brand span{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-style:italic;font-size:26px;letter-spacing:.06em}
@@ -66,7 +67,7 @@
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:"Barlow",sans-serif;font-weight:700;font-size:16px;text-decoration:none;border-radius:12px;padding:14px 22px;transition:background-color .15s,transform .15s;border:0;cursor:pointer}
   .btn:active{transform:scale(.97)}
   .btn-go{background:var(--field);color:#fff}
-  .btn-go:hover{background:#1DB954}
+  .btn-go:hover{filter:brightness(.95)}
   .btn-small{padding:10px 16px;font-size:15px;border-radius:10px}
   .nav .btn-small{white-space:nowrap}
   @media (max-width:400px){.nav .btn-small{padding:9px 12px;font-size:14px}}
@@ -111,10 +112,10 @@
   .feed{flex:1;overflow:hidden;padding:8px 14px}
   .deal{border:1px solid #E5E7EB;border-radius:14px;padding:12px;margin-bottom:10px}
   .deal .row{display:flex;justify-content:space-between;align-items:center}
-  .deal .type{font-size:10.5px;font-weight:700;color:#16A34A}
+  .deal .type{font-size:10.5px;font-weight:700;color:#22C55E}
   .deal .amt{font-size:16px;font-weight:800}
   .deal .title{font-size:14px;font-weight:700;margin-top:4px;line-height:1.25}
-  .deal .biz{font-size:11.5px;color:#16A34A;font-weight:600;margin-top:2px}
+  .deal .biz{font-size:11.5px;color:#22C55E;font-weight:600;margin-top:2px}
   .deal .desc{font-size:11.5px;color:#6B7280;margin-top:5px;line-height:1.35}
   .deal .meta{display:flex;justify-content:space-between;font-size:10.5px;color:#6B7280;margin-top:7px}
   .deal .acts{display:flex;gap:6px;margin-top:9px}
@@ -180,7 +181,7 @@
   @media (max-width:520px){.open-join{width:100%}}
 
   /* ---------- sections ---------- */
-  section.block{padding:96px 0}
+  section.block{padding:88px 0}
   .mist{background:var(--mist)}
   .head{max-width:640px;margin-bottom:48px}
   .head .lede{margin-top:14px}
@@ -259,6 +260,155 @@
   .closer .stripe{position:absolute;right:-80px;top:-40px;bottom:-40px;width:260px;background:var(--field);transform:skewX(var(--slant));opacity:.9}
   @media (max-width:760px){.closer .stripe{width:120px;right:-70px}}
 
+
+  /* ---------- what is sideline (floating example deals) ---------- */
+  .what{position:relative;padding:120px 0 128px;overflow:hidden}
+  .what-copy{position:relative;z-index:1;max-width:640px;margin:0 auto;text-align:center}
+  .what-copy h2{color:var(--ink)}
+  .what-copy h2 em{color:var(--turf);font-style:italic}
+  .what-p{margin-top:28px;font-size:clamp(20px,2.2vw,24px);line-height:1.6;color:var(--ink);font-weight:500}
+  .floaters{position:absolute;inset:0;pointer-events:none}
+  .fcard{position:absolute;width:200px;background:#fff;border-radius:16px;padding:14px 15px;box-shadow:0 14px 34px -14px rgba(17,24,39,.3),0 0 0 1px rgba(17,24,39,.05)}
+  .fcard .t{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--turf)}
+  .fcard .n{font-size:15px;font-weight:700;line-height:1.25;margin-top:5px}
+  .fcard .b{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;gap:8px}
+  .fcard .b span{font-size:12.5px;color:var(--slate);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fcard .b b{font-size:16px}
+  .fcard:nth-child(1){left:4%;top:12%;transform:rotate(-5deg)}
+  .fcard:nth-child(2){left:1%;top:44%;transform:rotate(3deg)}
+  .fcard:nth-child(3){left:6%;top:74%;transform:rotate(-2deg)}
+  .fcard:nth-child(4){right:4%;top:10%;transform:rotate(4deg)}
+  .fcard:nth-child(5){right:1%;top:42%;transform:rotate(-4deg)}
+  .fcard:nth-child(6){right:5%;top:73%;transform:rotate(2deg)}
+  @media (prefers-reduced-motion:no-preference){
+    .fcard{animation:bob 6s ease-in-out infinite alternate}
+    .fcard:nth-child(2n){animation-duration:7.5s;animation-delay:-2s}
+    .fcard:nth-child(3n){animation-duration:8.5s;animation-delay:-4s}
+    @keyframes bob{to{translate:0 -10px}}
+  }
+  @media (max-width:1100px){.fcard{width:170px}.fcard:nth-child(1),.fcard:nth-child(4){top:4%}.fcard:nth-child(3),.fcard:nth-child(6){top:80%}}
+  @media (max-width:900px){
+    .what{padding:80px 0 40px}
+    .floaters{position:static;display:flex;gap:14px;overflow-x:auto;padding:36px 24px 20px;scroll-snap-type:x mandatory;pointer-events:auto}
+    .fcard{position:static;flex:none;transform:none!important;animation:none!important;scroll-snap-align:center}
+  }
+
+  /* ---------- interactive demo ---------- */
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+  .center .lede{margin-left:auto;margin-right:auto}
+  .demo-wrap{display:flex;flex-direction:column;align-items:center}
+  .demo-wrap .switch{margin-bottom:24px}
+  .demo{position:relative;width:100%;max-width:860px;background:#fff;border-radius:28px;box-shadow:0 20px 50px -24px rgba(17,24,39,.25),0 0 0 1px rgba(17,24,39,.06);padding:30px 24px 22px}
+  .demo-step{text-align:center;font:700 24px "Barlow Condensed",sans-serif;color:var(--turf)}
+  .demo-cap{text-align:center;color:var(--slate);font-size:16px;max-width:34em;margin:6px auto 18px;min-height:52px}
+  .demo-stage{position:relative;max-width:400px;margin:0 auto}
+  .scr{background:#F3F5F4;border-radius:22px;padding:18px 16px;min-height:330px;font-family:-apple-system,"SF Pro Text","Barlow",sans-serif}
+  .scr.swap{animation:swap .35s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes swap{from{opacity:0;transform:translateY(10px)}}
+  @media (prefers-reduced-motion:reduce){.scr.swap{animation:none}}
+  .a-title{font:800 italic 26px "Barlow Condensed",sans-serif;letter-spacing:.01em;text-transform:uppercase}
+  .a-seg{display:flex;background:#E7ECE9;border-radius:10px;padding:3px;margin-top:10px}
+  .a-seg span{flex:1;text-align:center;font-size:12px;font-weight:600;color:#6B7280;padding:6px 0;border-radius:8px}
+  .a-seg span.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(17,24,39,.12)}
+  .a-card{background:#fff;border-radius:16px;padding:14px 15px;margin-top:12px;box-shadow:0 6px 14px -6px rgba(17,24,39,.14)}
+  .a-type{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#22C55E}
+  .a-name{font-size:16px;font-weight:700;margin-top:4px;line-height:1.25}
+  .a-row{display:flex;justify-content:space-between;align-items:center;margin-top:7px;gap:10px}
+  .a-biz{font-size:13px;color:#6B7280}
+  .a-amt{font-size:18px;font-weight:800}
+  .a-big{font-size:30px;font-weight:800;margin-top:10px}
+  .a-lbl{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#6B7280}
+  .a-txt{font-size:13.5px;line-height:1.45;margin-top:5px}
+  .a-btn{display:block;text-align:center;background:var(--field);color:#fff;font-weight:700;font-size:15px;border-radius:12px;padding:12px 0;margin-top:14px}
+  .a-btn.dark{background:var(--ink)}
+  .a-note{font-size:12px;color:#6B7280;text-align:center;margin-top:7px}
+  .a-check{display:flex;align-items:center;gap:10px}
+  .a-check i{flex:none;width:22px;height:22px;border-radius:50%;background:var(--field);display:grid;place-items:center}
+  .a-sub{font-size:12.5px;color:#6B7280;margin-top:1px}
+  .a-field{border-bottom:1px solid #E5E7EB;padding:9px 0}
+  .a-field:last-child{border-bottom:0}
+  .a-field .v{font-size:15px;margin-top:2px}
+  .a-app{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #EEF0F2}
+  .a-app:last-child{border-bottom:0}
+  .a-av{width:34px;height:34px;border-radius:50%;background:#E7ECE9;display:grid;place-items:center;font-weight:800;font-size:12px;color:var(--ink);flex:none}
+  .a-acc{font-size:12px;font-weight:700;background:var(--field);color:#fff;border-radius:999px;padding:6px 12px}
+  .a-prog{display:flex;align-items:center;margin-top:12px}
+  .a-prog b{width:16px;height:16px;border-radius:50%;background:#E5E7EB;flex:none}
+  .a-prog b.d{background:var(--field)}
+  .a-prog b.n{background:#fff;border:2.5px solid var(--field);box-shadow:0 0 0 4px rgba(34,197,94,.2)}
+  .a-prog s{flex:1;height:3px;background:#E5E7EB;text-decoration:none}
+  .a-prog s.d{background:var(--field)}
+  .a-plabels{display:flex;justify-content:space-between;font-size:10px;color:#6B7280;font-weight:600;margin-top:5px}
+  .demo-nav{position:absolute;top:50%;width:44px;height:44px;border-radius:50%;border:0;background:#fff;box-shadow:0 4px 14px -4px rgba(17,24,39,.3);display:grid;place-items:center;cursor:pointer;color:var(--turf)}
+  .demo-nav:disabled{opacity:.3;cursor:default}
+  .demo-nav.prev{left:18px}.demo-nav.next{right:18px}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:18px}
+  .dots button{width:8px;height:8px;border-radius:999px;border:0;background:#D1D5DB;padding:0;cursor:pointer;transition:width .2s,background-color .2s}
+  .dots button[aria-current="step"]{width:22px;background:var(--field)}
+  .types{display:inline-flex;flex-wrap:wrap;justify-content:center;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:4px;margin-top:22px;gap:2px}
+  .types button{font:600 15px "Barlow",sans-serif;color:var(--slate);background:none;border:0;border-radius:10px;padding:8px 14px;cursor:pointer}
+  .types button[aria-pressed="true"]{background:#F0FDF4;color:var(--turf)}
+  @media (max-width:640px){.demo{padding:24px 12px 18px}.demo-nav{top:auto;bottom:14px;width:38px;height:38px}.demo-nav.prev{left:14px}.demo-nav.next{right:14px}}
+
+  /* ---------- lime closing banner ---------- */
+  .banner-sec{padding:8px 0 72px}
+  .banner{position:relative;overflow:hidden;background:var(--field);border-radius:32px;padding:80px 32px;text-align:center}
+  .banner h2{font-size:clamp(48px,7vw,88px);font-weight:800;font-style:italic;color:var(--ink)}
+  .banner p{color:#0B3B1C;font-size:19px;margin:14px auto 0;max-width:30em}
+  .banner .bar-deco{position:absolute;height:70px;border-radius:22px;background:#fff;opacity:.16;transform:skewX(var(--slant))}
+  .banner .join{margin:30px auto 0}
+  .banner .roles{justify-content:center}
+  .banner .roles span{color:var(--ink);border-color:rgba(17,24,39,.22);background:rgba(255,255,255,.18)}
+  .banner .roles input:checked + span{background:#fff;border-color:#fff;color:var(--ink)}
+  .banner input[type=email]{border-color:#fff}
+  .banner .btn-go{background:var(--ink);color:#fff}
+  .banner .btn-go:hover{background:#1F2937}
+  .banner .note{color:#0B3B1C}
+  .banner .msg.err{color:#7F1D1D}
+  .banner .done{background:#fff;border-color:#fff;text-align:left}
+
+  /* ---------- protections bento (11/23) ---------- */
+  .bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:18px}
+  .bento .tile{grid-column:span 2}.bento .tile.big{grid-column:span 4}.bento .tile:nth-child(3),.bento .tile:nth-child(4){grid-column:span 3}
+  .tile{background:#fff;border-radius:24px;padding:24px;box-shadow:0 14px 34px -18px rgba(17,24,39,.25),0 0 0 1px rgba(17,24,39,.05);display:flex;flex-direction:column}
+  .tile h3{font-family:"Barlow",sans-serif;font-size:20px;line-height:1.25;margin-top:18px}
+  .tile p{color:var(--slate);font-size:15.5px;margin-top:6px}
+  .mini{background:#F3F5F4;border-radius:16px;padding:16px;min-height:132px;display:flex;flex-direction:column;justify-content:center;gap:9px}
+  .paper .ln{height:7px;border-radius:4px;background:#DADFDC}
+  .w90{width:90%}.w70{width:70%}.w80{width:80%}
+  .sig{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;background:#fff;border-radius:10px;padding:7px 10px}
+  .sig i,.ok{width:18px;height:18px;border-radius:50%;background:var(--field);display:grid;place-items:center;flex:none}
+  .bub{max-width:82%;font-size:13.5px;padding:8px 12px;border-radius:14px;line-height:1.35}
+  .bub.them{background:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+  .bub.me{background:var(--field);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+  .pillrow{display:flex;align-items:center;gap:9px;background:#fff;border-radius:999px;padding:8px 12px 8px 8px}
+  .pillrow.muted{background:transparent;padding:0 4px;justify-content:center}
+  .pillrow.muted .pill-tx{color:var(--slate);font-weight:500;font-size:12.5px;flex:none}
+  .pill-ic{width:26px;height:26px;border-radius:50%;background:#F3F5F4;display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+  .pill-tx{flex:1;font-size:13.5px;font-weight:600}
+  .flow{display:flex;align-items:center;background:#F3F5F4;border-radius:18px;padding:26px 18px;min-height:170px}
+  .node{display:flex;flex-direction:column;align-items:center;text-align:center;flex:none;width:118px}
+  .node b{font-size:14px;margin-top:9px;line-height:1.2}
+  .node small{font-size:12px;color:var(--slate)}
+  .dot-ic{width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 18px "Barlow",sans-serif;box-shadow:0 4px 12px -4px rgba(17,24,39,.2)}
+  .dot-ic.lime{width:60px;height:60px;background:var(--field);box-shadow:0 0 0 8px rgba(34,197,94,.18)}
+  .rail{position:relative;flex:1;height:4px;border-radius:4px;background:repeating-linear-gradient(90deg,#CFD6D2 0 8px,transparent 8px 14px);margin-bottom:38px}
+  .coin{position:absolute;top:50%;left:0;transform:translate(-50%,-50%);font:700 12px "Barlow",sans-serif;font-style:normal;background:#fff;border:2px solid var(--field);border-radius:999px;padding:3px 9px;white-space:nowrap}
+  .coin.c2{opacity:0}
+  @media (prefers-reduced-motion:no-preference){
+    .coin{animation:move1 4.8s ease-in-out infinite}
+    .coin.c2{animation:move2 4.8s ease-in-out infinite}
+    @keyframes move1{0%{left:0;opacity:0}8%{opacity:1}40%{left:100%;opacity:1}46%,100%{left:100%;opacity:0}}
+    @keyframes move2{0%,52%{left:0;opacity:0}60%{opacity:1}92%{left:100%;opacity:1}100%{left:100%;opacity:0}}
+  }
+  @media (prefers-reduced-motion:reduce){.coin.c2{display:none}.coin{left:50%}}
+  @media (max-width:900px){.bento{grid-template-columns:1fr 1fr}.bento .tile,.bento .tile:nth-child(n){grid-column:span 1}.bento .tile.big{grid-column:1/-1}}
+  @media (max-width:600px){.bento{grid-template-columns:1fr}.bento .tile:nth-child(n){grid-column:1/-1}.flow{padding:20px 8px}.node{width:84px}.node b{font-size:12.5px}.node small{display:none}.dot-ic{width:40px;height:40px}.dot-ic.lime{width:50px;height:50px}}
+
+  /* ---------- giant footer wordmark ---------- */
+  .wordmark{margin-top:48px;font:800 italic clamp(64px,13vw,190px)/.86 "Barlow Condensed",sans-serif;letter-spacing:-.01em;color:var(--ink);user-select:none}
+  .wordmark span{color:var(--field)}
+
   footer{padding:56px 0 36px;color:var(--slate);font-size:15px}
   .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
   .foot-brand .tag{margin-top:12px;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-style:italic;font-size:24px;color:var(--ink);line-height:1.1}
@@ -293,7 +443,6 @@
     <a class="brand" href="#" aria-label="Sideline home"><img src="assets/logo-header.png" alt="" width="36" height="26"><span>SIDELINE</span></a>
     <nav class="nav" aria-label="Main">
       <a href="#how">How it works</a>
-      <a href="#money">Pricing</a>
       <a href="#faq">FAQ</a>
       <a class="btn btn-go btn-small" href="#join">Get launch updates</a>
     </nav>
@@ -307,7 +456,7 @@
       <div>
         <h1><span class="line">NIL deals,</span><span class="line">simplified.</span></h1>
         <p class="lede">Sideline connects student-athletes with local businesses for paid promo deals. Post, apply, sign, and get paid in one app, with every dollar held safely until the work is done.</p>
-        <div class="reveal">
+        <div class="reveal" id="join">
           <button type="button" class="btn btn-go open-join" aria-expanded="false" aria-controls="hero-join">Get launch updates <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M3 9h11M10 4.5L14.5 9 10 13.5"/></svg></button>
           <div class="join-panel" id="hero-join"><div>
         <form class="join" data-source="hero" novalidate>
@@ -338,25 +487,12 @@
           <div class="screen">
             <div class="island"></div>
             <div class="status"><span>9:41</span><span>100%</span></div>
-            <div class="app-head">Deals</div>
-            <div class="pills"><span class="pill on">Browse</span><span class="pill">Saved</span><span class="pill">Applied</span></div>
-            <div class="feed">
-              <div class="deal">
-                <div class="row"><span class="type">Social Post</span><span class="amt">$200</span></div>
-                <div class="title">Game-day Instagram post</div>
-                <div class="biz">Greenline Smoothie Co.</div>
-                <div class="desc">One feed post and two stories featuring our new post-game smoothie, tagged before Saturday.</div>
-                <div class="meta"><span>2 of 3 spots left</span><span>Expires Oct 30</span></div>
-                <div class="acts"><span class="ghost">Save</span><span class="solid">Apply</span></div>
-              </div>
-              <div class="deal">
-                <div class="row"><span class="type">In-Store Appearance</span><span class="amt">$300</span></div>
-                <div class="title">Saturday meet and greet</div>
-                <div class="biz">Field House Barbershop</div>
-                <div class="desc">Two hours at our grand reopening. Photos and autographs with customers.</div>
-                <div class="meta"><span>1 of 1 spot left</span><span>Expires Nov 6</span></div>
-                <div class="acts"><span class="ghost">Save</span><span class="solid">Apply</span></div>
-              </div>
+            <div style="flex:1;background:#F3F5F4;padding:6px 14px 0">
+              <div class="a-title">Deals</div>
+              <div class="a-seg"><span class="on">Browse</span><span>Saved</span><span>Applied</span></div>
+              <div class="a-card"><div class="a-type">Social Post</div><div class="a-name">Game-day Instagram post</div><div class="a-row"><span class="a-biz">Greenline Smoothie Co.</span><span class="a-amt">$200</span></div></div>
+              <div class="a-card"><div class="a-type">In-Store Appearance</div><div class="a-name">Saturday meet and greet</div><div class="a-row"><span class="a-biz">Field House Barbershop</span><span class="a-amt">$300</span></div></div>
+              <div class="a-card"><div class="a-type">Event Promotion</div><div class="a-name">Homecoming weekend promo</div><div class="a-row"><span class="a-biz">Lumen Cycle Studio</span><span class="a-amt">$400</span></div></div>
             </div>
             <div class="tabbar" aria-hidden="true">
               <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Home</span>
@@ -371,133 +507,101 @@
     </div>
   </section>
 
-  <section class="block mist" id="sides">
-    <div class="wrap">
-      <div class="head">
-        <h2>Two sides of every deal</h2>
-        <p class="lede">Athletes find paid work from businesses around campus. Businesses reach the players their customers already cheer for.</p>
-      </div>
-      <div class="switch" role="tablist" aria-label="Choose who you are">
-        <button role="tab" id="tab-athletes" aria-selected="true" aria-controls="panel-athletes">For athletes</button>
-        <button role="tab" id="tab-businesses" aria-selected="false" aria-controls="panel-businesses">For businesses</button>
-      </div>
-
-      <div class="side" id="panel-athletes" role="tabpanel" aria-labelledby="tab-athletes">
-        <ul class="points">
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Keep 100% of every deal</h3><p>No commission comes out of your pay. The business covers the platform fee.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Apply in a tap</h3><p>Browse open deals from local businesses, see the pay up front, and apply to the ones that fit.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Paid the moment it’s done</h3><p>The business pays before you start, and Sideline holds the money. When both sides mark the deal complete, it’s sent to your bank.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Sign up with your school email</h3><p>Create a profile with your sport, position, and socials so businesses know who they’re working with.</p></div></li>
-        </ul>
-        <div class="phone" role="img" aria-label="Athlete Tracker preview">
-          <div class="screen">
-            <div class="island"></div>
-            <div class="status"><span>9:41</span><span>100%</span></div>
-            <div class="app-head">Tracker</div>
-            <div style="margin:10px 14px 4px;border:1px solid #E5E7EB;border-radius:14px;padding:14px">
-              <div style="font-size:12px;color:#6B7280;font-weight:600">Earnings this month</div>
-              <div style="font-size:34px;font-weight:800;margin-top:2px">$650</div>
-              <div style="display:flex;gap:8px;margin-top:10px">
-                <div style="flex:1;background:#F9FAFB;border-radius:10px;padding:8px"><div style="font-weight:800;font-size:15px">$217</div><div style="font-size:10.5px;color:#6B7280">Avg per deal</div></div>
-                <div style="flex:1;background:#F9FAFB;border-radius:10px;padding:8px"><div style="font-weight:800;font-size:15px">3</div><div style="font-size:10.5px;color:#6B7280">Completed deals</div></div>
-              </div>
-            </div>
-            <div class="pills"><span class="pill on">Active Deals</span><span class="pill">Deal History</span></div>
-            <div class="feed">
-              <div class="deal">
-                <div class="row"><span class="type">Event Promotion</span><span class="amt">$400</span></div>
-                <div class="title">Homecoming weekend promo</div>
-                <div class="biz">Lumen Cycle Studio</div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:10px"><i style="height:6px;border-radius:4px;background:#22C55E"></i><i style="height:6px;border-radius:4px;background:#22C55E"></i><i style="height:6px;border-radius:4px;background:#BBF7D0"></i></div>
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);font-size:9.5px;color:#6B7280;margin-top:4px;font-weight:600"><span>Signed</span><span>In progress</span><span>Completed</span></div>
-              </div>
-            </div>
-            <div class="tabbar" aria-hidden="true">
-              <span>Home</span><span>Deals</span><span class="on">Tracker</span><span>Messages</span><span>Account</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="side" id="panel-businesses" role="tabpanel" aria-labelledby="tab-businesses" hidden>
-        <ul class="points">
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Post a deal in minutes</h3><p>Start from a template: social post, in-store appearance, event promotion, podcast or interview. Set the pay and how many athletes you want.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Pick from real applicants</h3><p>See each athlete’s sport, socials, follower range, and ratings from other businesses before you accept.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Contracts written for you</h3><p>Every accepted athlete gets an NIL contract built from your deal terms. Both sides sign in the app.</p></div></li>
-          <li><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="2.4" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><h3>Pay only for finished work</h3><p>Sideline holds your payment. It’s only paid out after you confirm the deliverable and both sides mark the deal complete.</p></div></li>
-        </ul>
-        <div class="phone" role="img" aria-label="Business applicants preview">
-          <div class="screen">
-            <div class="island"></div>
-            <div class="status"><span>9:41</span><span>100%</span></div>
-            <div style="padding:6px 18px 0;color:#22C55E;font-weight:700;font-size:13px">Back to deals</div>
-            <div class="app-head" style="font-size:20px;padding-top:4px">Game-day Instagram post</div>
-            <div style="padding:2px 18px 8px;font-size:12px;color:#6B7280">$200 with 2 spots remaining</div>
-            <div class="feed">
-              <div class="applicant"><span class="av" style="background:#16A34A">JR</span><span class="who"><span class="nm">Jordan Reyes</span><br><span class="sp">Soccer, Forward</span></span><span class="acc">Accept</span></div>
-              <div class="applicant"><span class="av" style="background:#0F766E">MK</span><span class="who"><span class="nm">Maya Kim</span><br><span class="sp">Volleyball, Setter</span></span><span class="acc">Accept</span></div>
-              <div class="applicant"><span class="av" style="background:#4D7C0F">TB</span><span class="who"><span class="nm">Tyler Brooks</span><br><span class="sp">Wrestling</span></span><span class="acc">Accept</span></div>
-              <div class="applicant"><span class="av" style="background:#15803D">AL</span><span class="who"><span class="nm">Ava Lin</span><br><span class="sp">Lacrosse, Midfield</span></span><span class="acc">Accept</span></div>
-            </div>
-            <div class="tabbar" aria-hidden="true">
-              <span>Home</span><span class="on">Deals</span><span>Tracker</span><span>Messages</span><span>Profile</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="what" id="what">
+    <div class="floaters" aria-hidden="true">
+      <div class="fcard"><div class="t">Social post</div><div class="n">Game-day Instagram post</div><div class="b"><span>Greenline Smoothie Co.</span><b>$200</b></div></div>
+      <div class="fcard"><div class="t">In-store appearance</div><div class="n">Saturday meet and greet</div><div class="b"><span>Field House Barbershop</span><b>$300</b></div></div>
+      <div class="fcard"><div class="t">Podcast</div><div class="n">Pregame show guest</div><div class="b"><span>Valley Sports Radio</span><b>$150</b></div></div>
+      <div class="fcard"><div class="t">Event promotion</div><div class="n">Homecoming weekend promo</div><div class="b"><span>Lumen Cycle Studio</span><b>$400</b></div></div>
+      <div class="fcard"><div class="t">Social post</div><div class="n">TikTok taste test</div><div class="b"><span>Northside Pizza Co.</span><b>$175</b></div></div>
+      <div class="fcard"><div class="t">In-store appearance</div><div class="n">Grand opening signing</div><div class="b"><span>Ridgeline Outfitters</span><b>$250</b></div></div>
+    </div>
+    <div class="wrap what-copy">
+      <h2>What is <em>Sideline?</em></h2>
+      <p class="what-p" id="whatP">Sideline is where local businesses and college athletes make paid deals. A coffee shop wants a game-day post. A gym wants a face at its grand opening. Athletes apply, both sides sign a contract, and the business pays up front. Sideline holds the money until the work is done, then the athlete keeps every dollar.</p>
     </div>
   </section>
 
   <section class="block" id="how">
-    <div class="wrap">
-      <div class="head">
-        <h2>How a deal works</h2>
-        <p class="lede">Four steps from posting to payday.</p>
+    <div class="wrap demo-wrap">
+      <div class="head center">
+        <h2>See how it works</h2>
+        <p class="lede">Pick your side and tap through a real deal.</p>
       </div>
-      <div class="track">
-        <div class="step"><h3>Post</h3><p>A business posts a paid deal.</p></div>
-        <div class="step"><h3>Apply</h3><p>Athletes apply in a tap.</p></div>
-        <div class="step"><h3>Sign &amp; fund</h3><p>Contract signed, payment held safely.</p></div>
-        <div class="step"><h3>Get paid</h3><p>Work done, athlete gets 100%.</p></div>
+      <div class="switch" role="tablist" aria-label="Choose who you are">
+        <button role="tab" aria-selected="true" data-side="athlete">I&rsquo;m an athlete</button>
+        <button role="tab" aria-selected="false" data-side="business">I&rsquo;m a business</button>
       </div>
-    </div>
-  </section>
-
-  <section class="block mist" id="money">
-    <div class="wrap money">
-      <div>
-        <h2>Simple pricing. Athletes keep it all.</h2>
-        <p class="lede" style="margin-top:14px">Businesses pay a flat 20% platform fee on top of the deal amount. Nothing comes out of the athlete’s pay, and there’s nothing to pay to sign up.</p>
+      <div class="demo" aria-live="polite">
+        <div class="demo-step" id="demoStep"></div>
+        <p class="demo-cap" id="demoCap"></p>
+        <div class="demo-stage"><div class="scr" id="demoScr"></div></div>
+        <div class="dots" id="demoDots"></div>
+        <button class="demo-nav prev" id="demoPrev" aria-label="Previous step"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M12.5 4.5L7 10l5.5 5.5"/></svg></button>
+        <button class="demo-nav next" id="demoNext" aria-label="Next step"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M7.5 4.5L13 10l-5.5 5.5"/></svg></button>
       </div>
-      <div class="ledger" role="group" aria-label="Example: a $150 deal">
-        <div class="r"><span class="k">Deal amount<small>Set by the business</small></span><span class="v">$150</span></div>
-        <div class="r"><span class="k">Platform fee<small>20%, paid by the business</small></span><span class="v">$30</span></div>
-        <div class="r"><span class="k">Business pays<small>Held by Sideline until the deal is complete</small></span><span class="v">$180</span></div>
-        <div class="r athlete"><span class="k">Athlete receives<small>100% of the deal amount</small></span><span class="v">$150</span></div>
+      <div class="types" role="group" aria-label="Deal type" id="demoTypes">
+        <button aria-pressed="true" data-type="social">Social post</button>
+        <button aria-pressed="false" data-type="store">In-store</button>
+        <button aria-pressed="false" data-type="event">Event</button>
+        <button aria-pressed="false" data-type="podcast">Podcast</button>
       </div>
     </div>
   </section>
 
   <section class="block" id="trust">
     <div class="wrap">
-      <div class="head">
+      <div class="head center">
         <h2>Built to protect both sides</h2>
+        <p class="lede">Every deal runs through the app, so nobody is left chasing a payment or a no-show.</p>
       </div>
-      <div class="guards">
-        <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><h3>Payments through Stripe</h3><p>Payments are processed by Stripe and held until the work is confirmed. Sideline never stores card or bank numbers.</p></div></div>
-        <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/></svg><div><h3>A contract for every deal</h3><p>Terms, payment, and usage rights are written down and signed by both sides before any work starts.</p></div></div>
-        <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/></svg><div><h3>Chat that opens when it matters</h3><p>A private thread starts as soon as an athlete is accepted, so plans stay with the deal they belong to.</p></div></div>
-        <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><div><h3>Report and support built in</h3><p>Flag a conversation or contact support right from the app. Our team reviews every report.</p></div></div>
+      <div class="bento">
+        <div class="tile big">
+          <div class="flow" aria-hidden="true">
+            <div class="node"><span class="dot-ic">B</span><b>Business pays</b><small>before work starts</small></div>
+            <div class="rail"><i class="coin">$200</i></div>
+            <div class="node"><span class="dot-ic lime"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><b>Sideline holds it</b><small>until it&rsquo;s done</small></div>
+            <div class="rail"><i class="coin c2">$200</i></div>
+            <div class="node"><span class="dot-ic">A</span><b>Athlete gets paid</b><small>100% of the deal</small></div>
+          </div>
+          <h3>The money is held, not handed over</h3>
+          <p>The business pays up front and Sideline holds it until both sides mark the deal complete. If a deal falls through, the money goes back.</p>
+        </div>
+        <div class="tile">
+          <div class="mini paper" aria-hidden="true">
+            <div class="ln w90"></div><div class="ln w70"></div><div class="ln w80"></div>
+            <div class="sig"><i><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.4"><path d="M2.5 6.2l2.3 2.3L9.5 3.8"/></svg></i><span>Jordan Reyes</span></div>
+            <div class="sig"><i><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.4"><path d="M2.5 6.2l2.3 2.3L9.5 3.8"/></svg></i><span>Greenline Smoothie Co.</span></div>
+          </div>
+          <h3>A contract for every deal</h3>
+          <p>Terms, pay and usage rights are written down and signed by both sides before any work starts.</p>
+        </div>
+        <div class="tile">
+          <div class="mini chat" aria-hidden="true">
+            <div class="bub them">Does Thursday at 4 work?</div>
+            <div class="bub me">Works for me. See you then.</div>
+          </div>
+          <h3>Chat opens when it matters</h3>
+          <p>A private thread starts the moment an athlete is accepted, so plans stay with the deal.</p>
+        </div>
+        <div class="tile">
+          <div class="mini" aria-hidden="true">
+            <div class="pillrow"><span class="pill-ic">@</span><span class="pill-tx">jreyes@psu.edu</span><span class="ok"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.4"><path d="M2.5 6.2l2.3 2.3L9.5 3.8"/></svg></span></div>
+            <div class="pillrow muted"><span class="pill-tx">Verified school email</span></div>
+          </div>
+          <h3>Real athletes only</h3>
+          <p>Athletes sign up with their school email, so businesses know exactly who they&rsquo;re working with.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="block mist" id="faq">
+  <section class="block" id="faq">
     <div class="wrap">
       <div class="head"><h2>Questions</h2></div>
       <div class="faq">
-        <details><summary>Does it cost anything for athletes?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>No. Signing up is free and athletes keep 100% of the deal amount. The 20% platform fee is paid by the business, on top of the deal.</p></details>
-        <details><summary>When does the athlete get paid?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>When both sides mark the deal complete, the payment is sent to the athlete’s bank through Stripe. Bank transfers usually arrive within a few business days. Athletes set up payouts once, in the app.</p></details>
+        <details><summary>Does it cost anything for athletes?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>No. Signing up is free, and athletes keep 100% of every deal. Nothing comes out of your pay.</p></details>
+        <details><summary>When does the athlete get paid?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>When both sides mark the deal complete, the payment is sent straight to the athlete’s bank. Bank transfers usually arrive within a few business days. Athletes set up payouts once, in the app.</p></details>
         <details><summary>What kinds of deals are there?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>Social posts, in-store appearances, event promotions, podcasts and interviews, plus anything else a business wants to propose. Every deal is at least $100.</p></details>
         <details><summary>Which schools can use Sideline?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>We’re launching at Penn State first, with businesses in and around State College. Athletes sign up with their school email.</p></details>
         <details><summary>What if a deal falls through?<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3v14M3 10h14" stroke="#111827" stroke-width="2"/></svg></summary><p>Either side can end a deal in the app before it’s finished, with a reason. If that happens, the money goes back to the business.</p></details>
@@ -506,27 +610,6 @@
     </div>
   </section>
 
-  <section class="closer" id="join">
-    <div class="stripe" aria-hidden="true"></div>
-    <div class="wrap">
-      <div>
-        <h2>Be first on the field.</h2>
-        <p>Sideline is coming to the App Store. Join the list and we’ll email you the day it launches.</p>
-      </div>
-      <form class="join on-dark" data-source="footer" novalidate>
-          <div class="roles" role="radiogroup" aria-label="I'm signing up as">
-            <label><input type="radio" name="role" value="athlete"><span>I’m an athlete</span></label>
-            <label><input type="radio" name="role" value="business"><span>I’m a business</span></label>
-          </div>
-          <div class="row">
-            <input type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@email.com" aria-label="Email address" spellcheck="false" autocapitalize="off" maxlength="254">
-            <button class="btn btn-go" type="submit">Get launch updates</button>
-          </div>
-          <p class="msg" aria-live="polite"></p>
-          <p class="note">We’ll only email you about Sideline. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
-        </form>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -534,14 +617,12 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top" aria-label="Sideline home"><img src="assets/logo-header.png" alt="" width="36" height="26"><span>SIDELINE</span></a>
-        <div class="tag">NIL deals, simplified.</div>
         <p>Paid promo deals between student-athletes and local businesses, with secure payments built in.</p>
       </div>
       <div>
         <h2 class="fh">Sideline</h2>
         <ul>
           <li><a href="#how">How it works</a></li>
-          <li><a href="#money">Pricing</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#join">Get launch updates</a></li>
         </ul>
@@ -569,29 +650,83 @@
 </footer>
 
 <script>
-  // header gets a hairline once you scroll
-  var hdr = document.getElementById('top');
-  addEventListener('scroll', function(){ hdr.classList.toggle('scrolled', scrollY > 8); }, { passive:true });
 
-  // athletes / businesses switch
-  var tabs = document.querySelectorAll('.switch [role="tab"]');
-  tabs.forEach(function(tab, i){
-    tab.addEventListener('click', function(){
-      if (tab.getAttribute('aria-selected') === 'true') return;
-      tabs.forEach(function(t){
-        var on = t === tab;
-        var panel = document.getElementById(t.getAttribute('aria-controls'));
-        t.setAttribute('aria-selected', on);
-        panel.hidden = !on;
-        panel.classList.remove('in-left', 'in-right');
-        if (on) { void panel.offsetWidth; panel.classList.add(i === 0 ? 'in-left' : 'in-right'); }
-      });
+
+  // ---------- interactive "see how it works" demo ----------
+  (function(){
+    var DEALS = {
+      social:  { type:'Social Post', title:'Game-day Instagram post', biz:'Greenline Smoothie Co.', amt:200, about:'One feed post and two stories with our new post-game smoothie, tagged before Saturday.' },
+      store:   { type:'In-Store Appearance', title:'Saturday meet and greet', biz:'Field House Barbershop', amt:300, about:'Two hours at our grand reopening. Photos and autographs with customers.' },
+      event:   { type:'Event Promotion', title:'Homecoming weekend promo', biz:'Lumen Cycle Studio', amt:400, about:'Promote our homecoming ride on your socials and stop by the Saturday class.' },
+      podcast: { type:'Podcast / Interview', title:'Pregame show guest', biz:'Valley Sports Radio', amt:150, about:'Join our Friday pregame show for a 15-minute interview about the season.' }
+    };
+    var CHECK = '<i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.2"><path d="M2.5 6.2l2.3 2.3L9.5 3.8"/></svg></i>';
+    function money(n){ return '$' + n.toLocaleString(); }
+    function card(d){ return '<div class="a-card"><div class="a-type">'+d.type+'</div><div class="a-name">'+d.title+'</div><div class="a-row"><span class="a-biz">'+d.biz+'</span><span class="a-amt">'+money(d.amt)+'</span></div></div>'; }
+    function prog(n){ // n = how many of the 5 steps are done
+      var labels = ['Accepted','Signed','Paid','Work done','Complete'], h = '<div class="a-prog">';
+      for (var i=0;i<5;i++){ h += '<b class="'+(i<n?'d':i===n?'n':'')+'"></b>'; if (i<4) h += '<s class="'+(i<n?'d':'')+'"></s>'; }
+      return h + '</div><div class="a-plabels">' + labels.map(function(l){return '<span>'+l+'</span>';}).join('') + '</div>';
+    }
+    var STEPS = {
+      athlete: [
+        { t:'1. Find a deal', c:'Browse paid deals from businesses around town. The pay is right on the card.',
+          s:function(d){ var o = DEALS[d===DEALS.social?'store':'social']; return '<div class="a-title">Deals</div><div class="a-seg"><span class="on">Browse</span><span>Saved</span><span>Applied</span></div>'+card(d)+card(o); } },
+        { t:'2. Apply in a tap', c:'Read what the business wants, then apply. No pitch decks, no agents.',
+          s:function(d){ return '<div class="a-card"><div class="a-type">'+d.type+'</div><div class="a-name" style="font-size:19px">'+d.title+'</div><div class="a-biz" style="margin-top:3px">'+d.biz+'</div><div class="a-big">'+money(d.amt)+'</div></div><div class="a-card"><div class="a-lbl">About the deal</div><div class="a-txt">'+d.about+'</div></div><span class="a-btn">Apply</span>'; } },
+        { t:'3. Sign, and the business pays', c:'Both sides sign a contract built from the deal. The business pays, and Sideline holds the money.',
+          s:function(d){ return '<div class="a-card"><div class="a-name">'+d.title+'</div><div class="a-biz" style="margin-top:2px">'+d.biz+'</div>'+prog(3)+'</div><div class="a-card a-check">'+CHECK+'<div><div style="font-weight:700;font-size:14.5px">NIL Contract</div><div class="a-sub">Signed by both sides</div></div></div><div class="a-card a-check">'+CHECK+'<div><div style="font-weight:700;font-size:14.5px">Paid</div><div class="a-sub">'+money(d.amt)+' held until the work is done</div></div></div>'; } },
+        { t:'4. Get paid', c:'Do the work and both sides mark it complete. 100% of the deal goes straight to your bank.',
+          s:function(d){ return '<div class="a-card"><div class="a-name">'+d.title+'</div><div class="a-biz" style="margin-top:2px">'+d.biz+'</div>'+prog(5)+'</div><div class="a-card" style="text-align:center;padding:22px 15px"><div class="a-lbl">Sent to your bank</div><div class="a-big" style="font-size:40px;margin-top:4px">'+money(d.amt)+'</div><div class="a-sub">You keep 100%</div></div><span class="a-btn">Share this deal</span>'; } }
+      ],
+      business: [
+        { t:'1. Post a deal', c:'Pick a deal type, describe what you need, and set your price. It takes about two minutes.',
+          s:function(d){ return '<div class="a-title">'+d.type.split(' /')[0]+'</div><div class="a-card" style="padding-top:6px;padding-bottom:6px"><div class="a-field"><div class="a-lbl">Title</div><div class="v">'+d.title+'</div></div><div class="a-field"><div class="a-lbl">Your price</div><div class="v" style="font-size:22px;font-weight:800">'+money(d.amt)+'</div></div><div class="a-field"><div class="a-lbl">Athletes needed</div><div class="v">1 athlete</div></div></div><span class="a-btn">Post deal</span>'; } },
+        { t:'2. Pick an athlete', c:'Athletes apply with their sport, socials and ratings. Accept the one that fits.',
+          s:function(d){ var ppl=[['JR','Jordan Reyes','Soccer, Forward'],['MK','Maya Kim','Volleyball, Setter'],['TB','Tyler Brooks','Wrestling']]; return '<div class="a-title" style="font-size:22px">'+d.title+'</div><div class="a-biz" style="margin-top:2px">3 applicants</div><div class="a-card" style="padding-top:4px;padding-bottom:4px">'+ppl.map(function(p){return '<div class="a-app"><span class="a-av">'+p[0]+'</span><div style="flex:1"><div style="font-weight:700;font-size:14px">'+p[1]+'</div><div class="a-sub">'+p[2]+'</div></div><span class="a-acc">Accept</span></div>';}).join('')+'</div>'; } },
+        { t:'3. Sign and lock in payment', c:'Sign the contract, then pay. Your money is held safely and only released when the work is done.',
+          s:function(d){ return '<div class="a-card"><div class="a-name">'+d.title+'</div><div class="a-biz" style="margin-top:2px">with Jordan Reyes</div>'+prog(2)+'</div><div class="a-card a-check">'+CHECK+'<div><div style="font-weight:700;font-size:14.5px">NIL Contract</div><div class="a-sub">Signed by both sides</div></div></div><span class="a-btn">Lock in payment</span><div class="a-note">Held safely until the work is done.</div>'; } },
+        { t:'4. Confirm and you’re done', c:'When the work is in, confirm it. The athlete gets paid and you can share the partnership.',
+          s:function(d){ return '<div class="a-card"><div class="a-name">'+d.title+'</div><div class="a-biz" style="margin-top:2px">with Jordan Reyes</div>'+prog(5)+'</div><div class="a-card a-check">'+CHECK+'<div><div style="font-weight:700;font-size:14.5px">Work confirmed</div><div class="a-sub">Payment released to Jordan</div></div></div><span class="a-btn">Share this deal</span>'; } }
+      ]
+    };
+    var side = 'athlete', type = 'social', step = 0;
+    var elStep = document.getElementById('demoStep'), elCap = document.getElementById('demoCap'), elScr = document.getElementById('demoScr');
+    var elDots = document.getElementById('demoDots'), prev = document.getElementById('demoPrev'), next = document.getElementById('demoNext');
+    function render(){
+      var st = STEPS[side][step];
+      elStep.textContent = st.t; elCap.textContent = st.c;
+      elScr.innerHTML = st.s(DEALS[type]);
+      elScr.classList.remove('swap'); void elScr.offsetWidth; elScr.classList.add('swap');
+      elDots.innerHTML = STEPS[side].map(function(_, i){ return '<button aria-label="Step '+(i+1)+'"'+(i===step?' aria-current="step"':'')+'></button>'; }).join('');
+      elDots.querySelectorAll('button').forEach(function(b, i){ b.onclick = function(){ step = i; render(); }; });
+      prev.disabled = step === 0; next.disabled = step === STEPS[side].length - 1;
+    }
+    prev.onclick = function(){ if (step > 0) { step--; render(); } };
+    next.onclick = function(){ if (step < STEPS[side].length - 1) { step++; render(); } };
+    document.querySelectorAll('#how .switch [role=tab]').forEach(function(b){
+      b.onclick = function(){
+        side = b.dataset.side; step = 0;
+        document.querySelectorAll('#how .switch [role=tab]').forEach(function(x){ x.setAttribute('aria-selected', x === b); });
+        render();
+      };
     });
-  });
+    document.querySelectorAll('#demoTypes button').forEach(function(b){
+      b.onclick = function(){
+        type = b.dataset.type;
+        document.querySelectorAll('#demoTypes button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); });
+        render();
+      };
+    });
+    document.querySelector('#how .demo').addEventListener('keydown', function(e){
+      if (e.key === 'ArrowRight') next.click(); if (e.key === 'ArrowLeft') prev.click();
+    });
+    render();
+  })();
 
-  document.querySelector('.switch').addEventListener('keydown', function(e){
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-    var next = tabs[e.key === 'ArrowRight' ? 1 : 0]; next.focus(); next.click();
+  // any "Get launch updates" link scrolls up to the hero and opens the sign-up
+  document.querySelectorAll('a[href="#join"]').forEach(function(a){
+    a.addEventListener('click', function(){ var b = document.querySelector('.open-join'); if (b) setTimeout(function(){ b.click(); }, 350); });
   });
 
   // hero: the button opens the form
